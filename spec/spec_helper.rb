@@ -2,6 +2,7 @@ require 'simplecov'
 require 'coveralls'
 
 SimpleCov.add_filter "/spec/"
+SimpleCov.add_filter "railtie.rb"
 
 if ENV["COVERAGE"]
   SimpleCov.start

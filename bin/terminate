@@ -4,27 +4,15 @@ require 'optparse'
 require 'logger'
 require 'terminate'
 
-help = ''
-options = {}
-OptionParser.new do |opts|
-  opts.banner = "Usage: wait_stop [pid] [options]"
-  opts.on('-t', '--timeout=TIMEOUT', 'Timeout to kill(seconds, default is 10)') { |v| options[:timeout] = v }
-  opts.on('-s', '--signal=SIGNAL', 'SIGNAL to terminate(default TERM)') { |v| options[:signal] = v }
-  help = opts.to_s
-end.parse!
+options = Terminate::Options.new
 
-pid = ARGV[0].to_i
-if pid <= 0
-  puts help
+if options.pid <= 0
+  puts options.help
   exit
 end
-
-timeout = options[:timeout].to_i
-timeout = 10 if timeout <= 0
-signal = options[:signal] || 'TERM'
 
 Terminate.logger = Logger.new(STDOUT)
 Terminate.logger.formatter = proc do |severity, datetime, progname, msg|
    "#{msg}\n"
 end
-Terminate.execute(pid, timeout, signal)
+Terminate.execute(options.pid, options.timeout, options.signal)

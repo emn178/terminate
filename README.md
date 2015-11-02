@@ -32,6 +32,21 @@ Terminate.execute(pid, 30)
 Terminate.execute(pid, 30, 'USR1')
 ```
 
+### Rake
+You can alos run by `rake`:
+
+    bundle exec terminate [pid] -- [options]
+
+Eg.
+
+    # default timeout is 10 seconds
+    bundle exec terminate 1234
+
+    # set timeout 30
+    bundle exec terminate 1234 -- -t 30
+    # or
+    bundle exec terminate 1234 -- --timeout=30
+
 ### Command Line
 You can alos run by `terminate` in command line.
 

@@ -1,4 +1,6 @@
 require 'timeout'
+require 'terminate/options'
+require 'terminate/railtie'
 
 module Terminate
   def self.logger=(logger)
